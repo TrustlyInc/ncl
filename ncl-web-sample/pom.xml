@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>ncl</artifactId>
+		<groupId>com.paywithmybank</groupId>
+		<version>0.1.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	
+    <artifactId>ncl-web-sample</artifactId>
+    <description>NCL - NCL Web Sample</description>
+    <packaging>war</packaging>
+    
+    <dependencies>
+    	<dependency>
+			<groupId>com.paywithmybank</groupId>
+			<artifactId>ncl-web</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.javalite</groupId>
+            <artifactId>activeweb</artifactId>
+            <version>1.13</version>
+        </dependency>
+    </dependencies>
+	<build>
+	<plugins>
+		<plugin>
+                <groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sun</groupId>
+                        <artifactId>tools</artifactId>
+                        <version>${java.version}</version>
+                        <scope>system</scope>
+                        <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                    </dependency>
+                </dependencies>
+                <configuration>
+					<webApp>
+						<contextPath>/ncl</contextPath>
+						<resourceBases>
+							<resourceBase>${basedir}/src/main/webapp</resourceBase>
+						</resourceBases>
+					</webApp>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+					<httpConnector>
+						<port>8800</port>
+						<idleTimeout>1000</idleTimeout>
+					</httpConnector>
+                </configuration>
+            </plugin>
+	</plugins>
+	</build>
+</project>
