@@ -1,6 +1,8 @@
-$module panel;
+$module panel; //Define module name as panel
 
-panel [
+/* Composition rule of panel elements.
+   Most panel elements will be further declared later. */
+panel [  
 	header [
 		back_button
 		header_title,
@@ -61,11 +63,17 @@ cancel_confirmation [
 	alternative_actions
 ]
 
-panel#select_bank { 
-	header_title {
+//Declaration rule for the panel elements having the id select_bank
+panel#select_bank {
+    
+	/* Overrides the declaration rule for header_title elements having panel#select_bank as ascendant 
+	   the element panel#select_bank (panel#select_bank header_title).
+	   The rule set a new text for the header_title element */
+	header_title { 
 		text="Select your bank";
 	}
 	
+	//Overrides the composition rule for content elements 
 	content [
 		widget [
 			widget-icon [

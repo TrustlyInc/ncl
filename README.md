@@ -5,6 +5,8 @@ NCL is a new configuration and composition language inspired on CSS.
 
 The main idea is to use CSS like rules to create the data. So it is possible to use rules/templates and override the configuration and the composition of components or any other kind of data.
 
+For a complete example see the file [panel.ncl](https://github.com/PayWithMyBank/ncl/blob/master/ncl-web-sample/src/main/resources/panel.ncl).
+
 
 # Why
 
