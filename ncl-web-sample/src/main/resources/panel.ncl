@@ -15,13 +15,11 @@ panel [
 		cancel_confirmation
 	],
 	footer {
-		text="Secure connection by PayWithMyBank&reg;";
+		"Secure connection by PayWithMyBank&reg;";
 	}
 ]
 
-simple_error {
-	text = "${errorMessage!}";
-}
+simple_error {"${errorMessage!}"}
 
 back_button [
 	header-back[
@@ -38,39 +36,34 @@ cancel_button [
 continue_button {
 	type="button";
 	iconClass="fa fa-lock";
-	label="Continue";
+	"Continue"
 }
 
 terms_of_use {
-	text = "By clicking 'Agree &amp; Sign In' you agree to the PayWithMyBank<sup>&reg;</sup> <a href='#' class='bt-show-terms'>Terms of Use</a>.";
+	"By clicking 'Agree &amp; Sign In' you agree to the PayWithMyBank<sup>&reg;</sup> <a href='#' class='bt-show-terms'>Terms of Use</a>."
 }
 
 cancel_confirmation [
 	mainContent [
 		cancel_title {
-			text = "Cancel Payment";
+			"Cancel Payment"
 		},
 		cancel_subtitle {
-			text = "Your account will not be debited if you cancel.";
+			"Your account will not be debited if you cancel."
 		},
-		button#do-cancel@non-attractive@small {
-			label = "Cancel Payment";
-		},
-		button#dont-cancel@fa@fa-lock@small {
-			label = "Continue Payment";
-		}
+		button#do-cancel@non-attractive@small {"Cancel Payment"},
+		button#dont-cancel@fa@fa-lock@small {"Continue Payment"}
 	],
 	alternative_actions
 ]
 
 //Declaration rule for the panel elements having the id select_bank
 panel#select_bank {
-    
 	/* Overrides the declaration rule for header_title elements having panel#select_bank as ascendant 
 	   the element panel#select_bank (panel#select_bank header_title).
 	   The rule set a new text for the header_title element */
 	header_title { 
-		text="Select your bank";
+		"Select your bank"   //Same as -> text="Select your bank";
 	}
 	
 	//Overrides the composition rule for content elements 
@@ -80,9 +73,9 @@ panel#select_bank {
 				fa@fa-lock
 			],
 			widget-text {
-				text="<strong class='widget-text-title'>Safe and simple way to pay.</strong>
+				"<strong class='widget-text-title'>Safe and simple way to pay.</strong>
 				      Your bank login is never seen or stored <br/>
-					  by ${merchant}.";
+					  by ${merchant}."
 			}
 		]
 		bank_selector
@@ -90,9 +83,7 @@ panel#select_bank {
 }
 
 panel#credentials { 
-	header_title {
-		text="Sign Into ${institutionShortName!institutionName!}";
-	}
+	header_title {"Sign Into ${institutionShortName!institutionName!}"}
 	
 	content [
 		credentials-content [
@@ -108,52 +99,40 @@ panel#credentials@sign_in {
 		terms_of_use
 	]
 	
-	continue_button#bt-post {
-		label="Agree &amp; Sign In";
-	}
+	continue_button#bt-post {"Agree &amp; Sign In"}
 }
 
 panel#credentials@mfa { 
 	credentials-content[
 		label#page-text {
-			text="<strong>${institutionName!}</strong> needs a bit more information to confirm your identity.";
+			"<strong>${institutionName!}</strong> needs a bit more information to confirm your identity."
 		},
 		credentials_input
 	]
 }
 
 panel#accounts { 
-	header_title {
-		text="Choose an account";
-	}
+	header_title {"Choose an account"}
 	
 	content [
 		radio_account_list,
 		authorization_term,
 		printable_terms_button,
-		continue_button#continue-account {
-			label="${finishButtonLabel!'Confirm'}";
-		}
+		continue_button#continue-account {"${finishButtonLabel!'Confirm'}"}
 	]
 }
 
 panel#credentials@partial { 
-	header_title {
-		text="More information needed";
-	}
+	header_title {"More information needed"}
 	
 	credentials-content[
-		more_info@page-text {
-			text="In order to complete this transaction, we need more information from you.";
-		},
+		more_info@page-text {"In order to complete this transaction, we need more information from you."},
 		credentials_input
 	]
 }
 
 panel#ech { 
-	header_title {
-		text="Enter bank information";
-	}
+	header_title {"Enter bank information"}
 	
 	content [
 		ech-help [
@@ -166,9 +145,7 @@ panel#ech {
 }
 
 panel#ech_confirmation { 
-	header_title {
-		text="Enter bank information";
-	}
+	header_title {"Enter bank information"}
 	
 	content [
 		ech_info,
@@ -178,22 +155,16 @@ panel#ech_confirmation {
 		printable_terms_button {
 			fiType="ech";
 		},
-		continue_button#post-button@small {
-			label="Finish";
-		}
+		continue_button#post-button@small {"Finish"}
 	]
 }
 
 panel#error { 
-	label#header_title {
-		text="Error";
-	}
+	label#header_title {"Error"}
 	
 	content [
 		error_type_msg [
-			text {
-				text="Please try the following option(s):";
-			}
+			text {"Please try the following option(s):"}
 		],
 		alternative_actions
 	]
@@ -203,17 +174,15 @@ panel#error@NoEligibleAccounts {
 	error_type_msg[
 		error_noeligibleaccounts [
 			email_form {
-				text="<p class='text'>Think a mistake has been made? Give us your email and we'll investigate this and get back to you.</p>
-					  <div class='email-input'>
-						<input type='text' placeholder='Your email address'><button>Submit</button>
-					  </div>
-					  <span class='field-error'></span>";
+				"<p class='text'>Think a mistake has been made? Give us your email and we'll investigate this and get back to you.</p>
+				 <div class='email-input'>
+					<input type='text' placeholder='Your email address'><button>Submit</button>
+				 </div>
+				 <span class='field-error'></span>"
 			},
 			thanks {
-				text="<p class='text'>Thank you for your contact information.
-						Our team will contact you shortly.
-						<br/><br/>
-						Additionally, you may choose one of the following options:</p>";
+				"<p class='text'>Thank you for your contact information. Our team will contact you shortly.<br/><br/>
+						         Additionally, you may choose one of the following options:</p>"
 			}
 		]
 	]
@@ -221,9 +190,7 @@ panel#error@NoEligibleAccounts {
 
 panel#error@isTimeOutWhileAuthorizing {
 	error_type_msg[
-		text {
-			text="Please contact the merchant to confirm your transaction was completed.";
-		}
+		text {"Please contact the merchant to confirm your transaction was completed."}
 	]
 }
 

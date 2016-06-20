@@ -50,7 +50,7 @@ public class Parser extends BaseParser{
 		expressions = new ASTNode(ASTNode.Type.EXPRESSIONS);
 		
 		while(token != null){
-			optional(SPC); 
+			space(); 
 			if(!_expression(expressions)){
 				error("Unknow expression");
 			}
@@ -128,7 +128,7 @@ public class Parser extends BaseParser{
 		if(!_selectors_group(rule)){
 			return false;
 		}
-		optional(SPC);
+		space();
 		if(!_block_or_vector(rule)){
 			error("Mising block or vector");
 			return false;
@@ -147,7 +147,7 @@ public class Parser extends BaseParser{
 		optional(SPACE);
 		
 		while(optional(COMMA) != null) {
-			optional(SPC);
+			space();
 			if(!_selector(selectors_group)){
 				error("Mising selector");
 				return false;
@@ -174,7 +174,7 @@ public class Parser extends BaseParser{
 			if(comb != null) {
 				ASTNode combinator = selector.add(new ASTNode(ASTNode.Type.COMBINATOR));
 				combinator.data = comb.value;
-				optional(SPC);
+				space();
 				if(!_simple_selector(selector)){
 					error("Mising selector");
 					return false;
@@ -272,7 +272,7 @@ public class Parser extends BaseParser{
 		if(optional(VBAR) == null){
 			return false;
 		}
-		optional(SPC);
+		space();
 		
 		ASTNode filter = simple_selector.add(new ASTNode(ASTNode.Type.FILTER));
 		
@@ -280,7 +280,7 @@ public class Parser extends BaseParser{
 			error("Expection function ");
 		}
 		
-		optional(SPC);
+		space();
 		mandatory(VBAR, "Expecting '|'");
 		return true;
 	}
@@ -341,7 +341,7 @@ public class Parser extends BaseParser{
 				return false;
 			}
 		} else {
-			optional(SPC);
+			space();
 			_vector(rule);
 		}
 		return true;
@@ -357,24 +357,40 @@ public class Parser extends BaseParser{
 		ASTNode block = rule.add(new ASTNode(ASTNode.Type.BLOCK));
 		
 		while(token != null && !R_BRACE.equals(token)) {
-			optional(SPC);
+			space();
 			if(! _block_item(block)) {
 				error("Invalid block item");
 			}
-			optional(SPC);
+			space();
 		}
 
 		mandatory(R_BRACE,"Missing '}'");
 		return true;
 	}
 	
-	//block_item = rule | declaration
+	//block_item = rule | declaration | text_declaration
 	private boolean _block_item(ASTNode block) {
-		if(!_declaration(block)){
-			if(!_rule(block)){
-				return false;
+		if(!_simple_declaration(block)){
+			if(!_declaration(block)){
+				if(!_rule(block)){
+					return false;
+				}
 			}
 		}
+		return true;
+	}
+	
+	//_simple_declaration = string_value ';'
+	private boolean _simple_declaration(ASTNode block) {
+		Lexer.Token value = optional(STRING);
+		if(value == null) {
+			return false;
+		}
+		ASTNode declaration = block.add(new ASTNode(ASTNode.Type.DECLARATION));
+		declaration.add(new ASTNode(ASTNode.Type.ATTRIBUTE)).data = "text";
+		declaration.add(new ASTNode(ASTNode.Type.VALUE)).data = value.value;
+		space();
+		optional(SEMICOLON);
 		return true;
 	}
 
@@ -388,18 +404,18 @@ public class Parser extends BaseParser{
 
 		declaration.add(new ASTNode(ASTNode.Type.ATTRIBUTE)).data = mandatory(IDENT, "Missing property").value;
 		
-		optional(SPC);
+		space();
 		
 		mandatory(EQUAL,"Expecting '='");
 		
-		optional(SPC);
+		space();
 		
 		if(!_value(declaration)){
 			error("Expecting value.");
 			return false;
 		}
 		
-		optional(SPC);
+		space();
 		
 		mandatory(SEMICOLON,"Expecting ';'");
 		return true;
@@ -447,11 +463,11 @@ public class Parser extends BaseParser{
 		boolean first = true;
 		while(token != null && !R_BRACKET.equals(token)) {
 			boolean required = false;
-			optional(SPC);
+			space();
 			if(!first) {
 				required = optional(COMMA) != null;
 			}
-			optional(SPC);
+			space();
 			if(!_vector_item(vector)){
 				if(required){
 					error("Expecting vector element");
@@ -473,7 +489,7 @@ public class Parser extends BaseParser{
 		ASTNode p = block_item.add(new ASTNode(ASTNode.Type.SELECTOR));
 
 		if(_simple_selector(p)){
-			optional(SPC);
+			space();
 			if(_block_or_vector(p)){
 				p.type = ASTNode.Type.SIMPLE_RULE;
 			} else {
@@ -491,6 +507,10 @@ public class Parser extends BaseParser{
 			}
 		}
 		return true;
+	}
+	
+	private void space(){
+		while(optional(SPC) != null);
 	}
 
 	public static void main(String[] args){
