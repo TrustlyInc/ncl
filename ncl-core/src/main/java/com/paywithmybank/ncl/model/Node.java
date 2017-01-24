@@ -196,5 +196,27 @@ public class Node {
     	}
     	return sb.toString();
     }
+
+	@Override
+	public boolean equals(Object arg0) {
+		Node node = (Node)arg0;
+		if(id == null){
+			if(node.id != null) return false;
+		} else {
+			if(!id.equals(node.id)) return false;
+		}
+
+		if((nodeName == null && node.nodeName != null) || !nodeName.equals(node.nodeName)) return false;
+		if(!contexts.equals(node.contexts)) return false;
+		if(!attributes.equals(node.attributes)) return false;
+		if(children == null){
+			if(node.children != null) return false;
+		} else {
+			if(!children.equals(node.children)) return false;
+		}
+		return true;
+	}
+	
+	
 	
 }
