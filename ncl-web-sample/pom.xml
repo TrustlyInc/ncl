@@ -31,15 +31,6 @@
                 <groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.sun</groupId>
-                        <artifactId>tools</artifactId>
-                        <version>${java.version}</version>
-                        <scope>system</scope>
-                        <systemPath>${java.home}/../lib/tools.jar</systemPath>
-                    </dependency>
-                </dependencies>
                 <configuration>
 					<webApp>
 						<contextPath>/ncl</contextPath>
