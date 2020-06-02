@@ -62,7 +62,7 @@ public class Module {
 	}
 
 	private void processRule(ASTNode astRule) {
-		addRule(createRule(astRule));
+		addRule(createRule(astRule),0);
 		
 	}
 	
@@ -262,13 +262,11 @@ public class Module {
 			imports = new ArrayList<>();
 		}
 		imports.add(moduleName);
-		
-		int count = 0;
+
 		if(m.rulesById != null){
 			for(List<Rule> lst : m.rulesById.values()){
 				for(Rule r : lst){
-					count++;
-					addRule(new Rule(r,pos + r.getOrder() ));
+					addRule(r,pos);
 				}
 			}
 		}
@@ -276,8 +274,7 @@ public class Module {
 		if(m.rulesByContext != null){
 			for(List<Rule> lst : m.rulesByContext.values()){
 				for(Rule r : lst){
-					count++;
-					addRule(new Rule(r,pos + r.getOrder() ));
+                    addRule(r,pos);
 				}
 			}
 		}
@@ -285,26 +282,25 @@ public class Module {
 		if(m.rulesByTag != null){
 			for(List<Rule> lst : m.rulesByTag.values()){
 				for(Rule r : lst){
-					count++;
-					addRule(new Rule(r,pos + r.getOrder() ));
+                    addRule(r,pos);
 				}
 			}
 		}
 		
 		if(m.otherRules != null){
 			for(Rule r : m.otherRules){
-				count++;
-				addRule(new Rule(r,pos + r.getOrder() ));
+                addRule(r,pos);
 			}
 		}
 		
-		pos += count;
+		pos += m.pos + 1;
 	}
 
-	Module addRule(Rule rule) {
+	Module addRule(Rule rule, int rPos) {
+	    rule = new Rule(rule,rPos + rule.getOrder());
 		if(rule.getChildren() != null){
 			for(Rule r : rule.getChildren()){
-				addRule(r);
+				addRule(r,rPos);
 			}
 		}
 		
@@ -312,7 +308,7 @@ public class Module {
 			for(Rule r : rule.getVector()) {
 				if(r.getChildren() != null){
 					for(Rule r2 : r.getChildren()){
-						addRule(r2);
+						addRule(r2,rPos);
 					}
 				}
 			}

@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>ncl</artifactId>
 		<groupId>com.paywithmybank</groupId>
-		<version>0.1.0</version>
+		<version>0.3.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	

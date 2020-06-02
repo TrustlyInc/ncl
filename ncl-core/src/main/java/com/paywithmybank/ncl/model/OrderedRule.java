@@ -16,7 +16,7 @@ public class OrderedRule  implements Comparable<OrderedRule>{
 		
 		if (result == 0){
 			if(!rule.equals(or.rule)){
-				result = rule.getOrder() - or.rule.getOrder();
+				result = or.rule.getOrder() - rule.getOrder();
 				
 				if(result == 0) {
 					result = 1;
