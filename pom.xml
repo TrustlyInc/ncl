@@ -4,7 +4,7 @@
 
 	<groupId>com.paywithmybank</groupId>
 	<artifactId>ncl</artifactId>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<packaging>pom</packaging>
 	<name>PayWithMyBank NCL</name>
 

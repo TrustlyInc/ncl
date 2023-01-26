@@ -1,6 +1,7 @@
 package com.paywithmybank.ncl.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -146,6 +147,13 @@ public class Node {
 
 	public Set<String> getContexts() {
 		return contexts;
+	}
+
+	public Set<String> keySet() {
+        if (attributes == null) {
+            return Collections.emptySet();
+        }
+		return attributes.keySet();
 	}
 	
 	public String toString() {
