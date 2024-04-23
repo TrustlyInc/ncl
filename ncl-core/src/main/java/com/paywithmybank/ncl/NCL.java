@@ -10,8 +10,16 @@ import com.paywithmybank.ncl.model.Source;
 
 public class NCL {
 	Map<String,Module> modules = new HashMap<>();
+
+    public NCL() {
+        loader = new ClassModuleLoader();
+    }
+
+    public NCL(String path) {
+        loader = new ClassModuleLoader(ClassModuleLoader.class, path);
+    }
 	
-	ModuleLoader loader = new ClassModuleLoader(); 
+	ModuleLoader loader;
 	
 	public synchronized Module loadModule(Source source) {
 		Module module = new Module(source,this);
