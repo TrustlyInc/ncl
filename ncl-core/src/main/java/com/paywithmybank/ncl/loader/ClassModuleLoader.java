@@ -34,7 +34,7 @@ public class ClassModuleLoader implements ModuleLoader {
             throw new RuntimeException(e);
         }
 	}
-	
+
     /*
      * Guarantees that the path ends with \ or /,
      * so that we can append the file name after.
