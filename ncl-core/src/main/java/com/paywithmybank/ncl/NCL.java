@@ -10,9 +10,9 @@ import com.paywithmybank.ncl.model.Source;
 
 public class NCL {
 
-    final ModuleLoader loader;
+    private final ModuleLoader loader;
 
-    Map<String,Module> modules = new HashMap<>();
+    private final Map<String,Module> modules = new HashMap<>();
 
     public NCL() {
         loader = new ClassModuleLoader();
