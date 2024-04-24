@@ -23,7 +23,7 @@ public class ClassModuleLoader implements ModuleLoader {
 	@Override
 	public Source openModule(String filename) {
         try {
-            if (path == null) {
+            if (path == null || path.trim().isEmpty()) {
                 String fileName = "/" + filename + ".ncl";
                 return new Source (fileName , loader.getResourceAsStream(fileName));
             } else {
