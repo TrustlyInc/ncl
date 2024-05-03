@@ -52,8 +52,7 @@ public class NCL {
         
         NCL ncl = new NCL();
 
-        long start = System.currentTimeMillis();                
-        //System.out.println(new Parser(code).parse().toString());
+        long start = System.currentTimeMillis();
         
         Module module;
         module = ncl.getModule("fb");
