@@ -10,6 +10,7 @@
 
 	<modules>
 		<module>ncl-core</module>
+		<module>ncl-navigator</module>
 		<module>ncl-web</module>
 		<module>ncl-web-sample</module>
 	</modules>
@@ -27,6 +28,7 @@
 		<jetty.servlet.version>2.5-6.0.1</jetty.servlet.version>
 		<jetty.version>9.2.7.v20150116</jetty.version>
 		<junit.version>4.12</junit.version>
+		<junit-jupiter.version>5.8.2</junit-jupiter.version>
 		<logback-classic>1.1.2</logback-classic>
 	</properties>
 
