@@ -4,7 +4,7 @@
 
 	<groupId>com.paywithmybank</groupId>
 	<artifactId>ncl</artifactId>
-	<version>0.5.0</version>
+	<version>0.5.1</version>
 	<packaging>pom</packaging>
 	<name>PayWithMyBank NCL</name>
 
@@ -15,44 +15,43 @@
 		<module>ncl-web-sample</module>
 	</modules>
 
-	<prerequisites>
-		<maven>3.0.0</maven>
-	</prerequisites>
-
-
 	<properties>
-		<activeweb.version>1.13</activeweb.version>
-		<guice.version>3.0</guice.version>
-		<java.version>1.8</java.version>
-		<jetty.distribution.version>9.2.7.v20150116</jetty.distribution.version>
-		<jetty.servlet.version>2.5-6.0.1</jetty.servlet.version>
-		<jetty.version>9.2.7.v20150116</jetty.version>
-		<junit.version>4.12</junit.version>
-		<junit-jupiter.version>5.8.2</junit-jupiter.version>
-		<logback-classic>1.1.2</logback-classic>
+		<java.version>21</java.version>
+		<jetty.version>11.0.24</jetty.version>
+		<junit-jupiter.version>5.11.2</junit-jupiter.version>
+		<mavenwar.version>3.3.2</mavenwar.version>
+		<mavencompiler.version>3.13.0</mavencompiler.version>
+		<verson-maven-plugin.version>2.17.1</verson-maven-plugin.version>
+		<freemarker.version>2.3.33</freemarker.version>
+		<activeweb.version>1.15</activeweb.version>
 	</properties>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${mavenwar.version}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
+				<version>${mavencompiler.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
-					<useIncrementalCompilation>false</useIncrementalCompilation><!--  Must be false because of a bug in the plugin --> 
 				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
-				<version>2.1</version>
+				<version>${verson-maven-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
-		
+
 	<organization>
 		<name>PayWithMyBank</name>
 		<url>https://www.paywithmybank.com</url>

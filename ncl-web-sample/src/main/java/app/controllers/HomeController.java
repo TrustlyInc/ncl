@@ -142,7 +142,7 @@ public class HomeController  extends AppController{
 			view("body_classes","paywithmybank instant select-bank index");
 			view("page",page + "@paywithmybank@instant@select-bank@index");
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		render("/page");
 	}
