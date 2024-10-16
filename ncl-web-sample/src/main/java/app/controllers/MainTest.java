@@ -37,7 +37,7 @@ public class MainTest {
 			System.out.println("Equivalent!");
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		
 	}

@@ -1,3 +1,14 @@
-/bin
-/*.project
-/.settings
+target
+bin
+*.iml
+*.log
+/.run
+/.idea
+**/.settings
+**/.classpath
+**/.project
+**/test-output/
+**/.DS_Store
+**/*.orig
+pom.xml.versionsBackup
+.DS_Store
