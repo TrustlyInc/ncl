@@ -24,6 +24,7 @@
 		<verson-maven-plugin.version>2.17.1</verson-maven-plugin.version>
 		<freemarker.version>2.3.33</freemarker.version>
 		<activeweb.version>1.15</activeweb.version>
+		<maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
 	</properties>
 
 	<build>
@@ -42,6 +43,12 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
 			</plugin>
 
 			<plugin>
