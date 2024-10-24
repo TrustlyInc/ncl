@@ -1,0 +1,35 @@
+name: Trigger Sonar
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  GH_TOKEN: ${{ secrets.GIT_TOKEN_SECRET }}
+  BAMBOO_TOKEN_SECRET: ${{ secrets.BAMBOO_TOKEN_SECRET }}
+  GITHUB_TOKEN_SECRET: ${{ secrets.GIT_TOKEN_SECRET }}
+  GITHUB_REPO_OWNER: ${{ github.repository_owner }}
+  GITHUB_REPO: ${{ github.event.repository.name }}
+  GITHUB_PR_ID: ${{ github.event.number }}
+
+jobs:
+  trigger_sonar:
+    if: |
+      github.repository == 'TrustlyInc/ncl' &&
+      github.event.pull_request.mergeable_status != 'dirty'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        run: git clone -q https://${GITHUB_TOKEN_SECRET}@github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO}.git --depth=2
+      - name: Trigger Bamboo Pipeline - SonarQube Pull Request Analysis
+        run: |
+          cd "${GITHUB_REPO}" || exit
+
+          echo -e "Github PR ID     : ${GITHUB_PR_ID}"
+          echo -e "Github repository: ${GITHUB_REPO}"
+
+          echo -e "Trigger Bamboo Pipeline"
+          curl --request POST \
+          "https://bamboo.paywithmybank.com/rest/api/latest/queue/CAS-SANPR?bamboo.GITHUB_PR_ID=${GITHUB_PR_ID}" --data "stage&executeAllStages" \
+          --header "Authorization: Bearer ${BAMBOO_TOKEN_SECRET}"
+        shell: bash
