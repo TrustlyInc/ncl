@@ -8,11 +8,11 @@
 		<version>0.5.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	
+
     <artifactId>ncl-web-sample</artifactId>
     <description>NCL - NCL Web Sample</description>
     <packaging>war</packaging>
-    
+
     <dependencies>
     	<dependency>
 			<groupId>com.paywithmybank</groupId>
@@ -22,7 +22,7 @@
 		<dependency>
             <groupId>org.javalite</groupId>
             <artifactId>activeweb</artifactId>
-            <version>1.13</version>
+            <version>${activeweb.version}</version>
         </dependency>
     </dependencies>
 	<build>
@@ -31,15 +31,6 @@
                 <groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.sun</groupId>
-                        <artifactId>tools</artifactId>
-                        <version>${java.version}</version>
-                        <scope>system</scope>
-                        <systemPath>${java.home}/../lib/tools.jar</systemPath>
-                    </dependency>
-                </dependencies>
                 <configuration>
 					<webApp>
 						<contextPath>/ncl</contextPath>
@@ -47,7 +38,6 @@
 							<resourceBase>${basedir}/src/main/webapp</resourceBase>
 						</resourceBases>
 					</webApp>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
 					<httpConnector>
 						<port>8800</port>
 						<idleTimeout>1000</idleTimeout>
